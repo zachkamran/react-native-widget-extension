@@ -36,6 +36,10 @@ export const withPodfile: ConfigPlugin<{ targetName: string }> = (
         newSrc: `installer.pods_project.targets.each do |target|
           target.build_configurations.each do |config|
             config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+          unless target.name == 'Sentry'
+            target.build_configurations.each do |config|
+              config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+            end
           end
         end`,
         anchor:
